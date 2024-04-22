@@ -1,8 +1,8 @@
 ﻿namespace LeetCode.Problems
 {
-    public interface IProblemSolver<TestCase, Input, Output> where TestCase : ITestCase<Input, Output> where Input : ITestCaseInput
+    public interface IProblemSolver<out TestCase, out Output> where TestCase : ITestCase<ITestCaseInput, Output>
     {
-        List<TestCase> TestCases { get; }
-        Output Solve(Input testCase);
+        TestCase[] TestCases { get; }
+        Output Solve(object testCaseInput);
     }
 }

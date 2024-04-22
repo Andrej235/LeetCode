@@ -1,6 +1,6 @@
 ﻿namespace LeetCode.Problems
 {
-    public class P1TwoSum : IProblemSolver<P1TwoSum.TwoSumTestCase, P1TwoSum.TwoSumTestCaseInput, int[]>
+    public class P1TwoSum : IProblemSolver<P1TwoSum.TwoSumTestCase, int[]>
     {
         public record TwoSumTestCaseInput(int[] Nums, int Target) : ITestCaseInput;
         public record TwoSumTestCase : ITestCase<TwoSumTestCaseInput, int[]>
@@ -14,7 +14,7 @@
             }
         }
 
-        public List<TwoSumTestCase> TestCases => [
+        public TwoSumTestCase[] TestCases => [
             new([2, 7, 11, 15], 9, [0, 1]),
             new([3, 2, 4], 6, [1, 2]),
             new([3, 3], 6, [0, 1]),
@@ -27,12 +27,18 @@
                 for (int j = i + 1; j < nums.Length; j++)
                 {
                     if (nums[i] + nums[j] == target)
-                        return [nums[i], nums[j]];
+                        return [i, j];
                 }
             }
             return [];
         }
 
-        public int[] Solve(TwoSumTestCaseInput testCase) => TwoSum(testCase.Nums, testCase.Target);
+        public int[] Solve(object testCaseInput)
+        {
+            if (testCaseInput is not TwoSumTestCaseInput twoSumTestCase)
+                throw new ArgumentException(null, nameof(testCaseInput));
+
+            return TwoSum(twoSumTestCase.Nums, twoSumTestCase.Target);
+        }
     }
 }
