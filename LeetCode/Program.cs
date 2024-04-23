@@ -58,7 +58,7 @@ namespace LeetCode
             }
 
             var outputType = problemSolver.TestCases.First().ExpectedOutput.GetType();
-            if (typeof(IEnumerable).IsAssignableFrom(outputType))
+            if (outputType != typeof(string) && typeof(IEnumerable).IsAssignableFrom(outputType))
             {
                 Console.WriteLine("array-like");
                 foreach (var testCase in problemSolver.TestCases)
