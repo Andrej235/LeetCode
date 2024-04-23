@@ -1,7 +1,5 @@
 ﻿using LeetCode.Problems;
 using System.Collections;
-using System.Reflection;
-using static LeetCode.Problems.P1TwoSum;
 
 namespace LeetCode
 {
@@ -40,7 +38,6 @@ namespace LeetCode
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(problemSolverType.Name);
 
-            //var problemSolver = Activator.CreateInstance(problemSolverType);
             var constructor = problemSolverType.GetConstructor([]);
             if (constructor is null)
             {
