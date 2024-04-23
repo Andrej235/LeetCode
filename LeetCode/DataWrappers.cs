@@ -13,4 +13,10 @@
         public static implicit operator InputWrapper<T>(T value) => new(value);
         public static implicit operator T(InputWrapper<T> value) => value.Value;
     }
+
+    public class TestCaseWrapper<T, U>(T input, U expectedOutput) : ITestCase<T, U> where T : ITestCaseInput where U : notnull
+    {
+        public T Input { get; } = input;
+        public U ExpectedOutput { get; } = expectedOutput;
+    }
 }

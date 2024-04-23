@@ -20,7 +20,7 @@ namespace LeetCode.Problems
             if (testCaseInput is not ZigZagTCInput zigZagTCInput)
                 throw new ArgumentException(null, nameof(testCaseInput));
 
-            return ZigZag(zigZagTCInput.s, zigZagTCInput.numRows);
+            return ZigZag(zigZagTCInput.S, zigZagTCInput.NumRows);
         }
 
         public static string ZigZag(string s, int numRows)
@@ -50,7 +50,7 @@ namespace LeetCode.Problems
             return result;
         }
 
-        public record ZigZagTCInput(string s, int numRows) : ITestCaseInput;
+        public record ZigZagTCInput(string S, int NumRows) : ITestCaseInput;
         public record ZigZagTC : ITestCase<ZigZagTCInput, string>
         {
             public ZigZagTCInput Input { get; }
