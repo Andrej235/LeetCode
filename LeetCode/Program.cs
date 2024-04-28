@@ -57,51 +57,6 @@ namespace LeetCode
                 return;
             }
 
-            var outputType = problemSolver.TestCases.First().ExpectedOutput.GetType();
-            if (outputType != typeof(string) && typeof(IEnumerable).IsAssignableFrom(outputType))
-            {
-                Console.WriteLine("array-like");
-                foreach (var testCase in problemSolver.TestCases)
-                {
-                    var result = problemSolver.Solve(testCase.Input);
-                    if (result is null)
-                    {
-                        if (testCase.ExpectedOutput is null)
-                            Console.WriteLine("OK");
-                        else
-                            Console.WriteLine("Failed");
-                    }
-
-                    if (testCase.ExpectedOutput is null)
-                    {
-                        Console.WriteLine("Failed");
-                        return;
-                    }
-
-                    var expectedOutput = (testCase.ExpectedOutput as IEnumerable)?.Cast<object>();
-                    var actualOutput = (result as IEnumerable)?.Cast<object>();
-
-                    if (expectedOutput is null || actualOutput is null || expectedOutput.Count() != actualOutput.Count())
-                    {
-                        Console.WriteLine("Failed");
-                        continue;
-                    }
-
-                    for (int i = 0; i < actualOutput.Count(); i++)
-                    {
-                        if (!actualOutput.JSONEquals(expectedOutput))
-                        {
-                            Console.WriteLine("Failed");
-                            return;
-                        }
-                    }
-
-                    Console.WriteLine("OK");
-                }
-
-                return;
-            }
-
             foreach (var testCase in problemSolver.TestCases)
             {
                 var result = problemSolver.Solve(testCase.Input);
@@ -109,11 +64,7 @@ namespace LeetCode
                 Console.WriteLine("Got: " + result.ToJSON());
                 Console.WriteLine("Expected: " + testCase.ExpectedOutput.ToJSON());
 
-                if (result.JSONEquals(testCase.ExpectedOutput))
-                    Console.WriteLine("OK");
-                else
-                    Console.WriteLine("Failed");
-
+                Console.WriteLine(result.JSONEquals(testCase.ExpectedOutput) ? "OK" : "Failed");
                 Console.WriteLine();
             }
         }
