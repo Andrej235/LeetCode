@@ -1,35 +1,39 @@
 ﻿using LeetCode.Problems;
-using System.Collections;
 
 namespace LeetCode
 {
     internal class Program
     {
+        static void Main() => ShowMenu();
         private static readonly IEnumerable<Type> problemSolvers = GetAllProblemSolvers();
 
-        static void Main()
-        {
-            ShowMenu();
-        }
-
-        static void ShowMenu(int choice = 0)
+        static void ShowMenu(int choice = 0, string search = "")
         {
             Console.Clear();
-            for (int i = 0; i < problemSolvers.Count(); i++)
+            if (search != "")
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine($"Search: {search}");
+            }
+
+            var searchResults = problemSolvers.Where(x => x.Name.Contains(search, StringComparison.InvariantCultureIgnoreCase));
+            for (int i = 0; i < searchResults.Count(); i++)
             {
                 Console.ForegroundColor = i == choice ? ConsoleColor.Green : ConsoleColor.White;
-                Console.WriteLine(problemSolvers.ElementAt(i));
+                Console.WriteLine(searchResults.ElementAt(i).Name);
             }
 
             var keyInfo = Console.ReadKey();
             if (keyInfo.Key == ConsoleKey.DownArrow)
-                ShowMenu(choice + 1 >= problemSolvers.Count() ? 0 : choice + 1);
+                ShowMenu(choice + 1 >= searchResults.Count() ? 0 : choice + 1, search);
             else if (keyInfo.Key == ConsoleKey.UpArrow)
-                ShowMenu(choice - 1 < 0 ? problemSolvers.Count() - 1 : choice - 1);
+                ShowMenu(choice - 1 < 0 ? searchResults.Count() - 1 : choice - 1, search);
             else if (keyInfo.Key == ConsoleKey.Enter)
-                StartTest(problemSolvers.ElementAt(choice));
+                StartTest(searchResults.ElementAt(choice));
+            else if (keyInfo.Key == ConsoleKey.Backspace)
+                ShowMenu(0, search.Length == 1 || keyInfo.Modifiers.HasFlag(ConsoleModifiers.Control) ? "" : search[..^1]);
             else
-                ShowMenu(choice);
+                ShowMenu(choice, search + keyInfo.KeyChar);
         }
 
         static void StartTest(Type problemSolverType)
@@ -72,10 +76,9 @@ namespace LeetCode
         static IEnumerable<Type> GetAllProblemSolvers()
         {
             Type iProbleSolverType = typeof(IProblemSolver<,>);
-
             return AppDomain.CurrentDomain.GetAssemblies()
-            .SelectMany(x => x.GetTypes())
-            .Where(x => !x.IsInterface && !x.IsAbstract && x.GetInterfaces().Any(x => x.IsGenericType && x.GetGenericTypeDefinition() == iProbleSolverType));
+                .SelectMany(x => x.GetTypes())
+                .Where(x => !x.IsInterface && !x.IsAbstract && x.GetInterfaces().Any(x => x.IsGenericType && x.GetGenericTypeDefinition() == iProbleSolverType));
         }
     }
 }
