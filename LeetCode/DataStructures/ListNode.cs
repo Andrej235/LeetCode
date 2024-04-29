@@ -19,8 +19,11 @@ namespace LeetCode.DataStructures
             Next = next;
         }
 
-        public static ListNode Create(params int[] values)
+        public static ListNode? Create(params int[] values)
         {
+            if (values.Length == 0)
+                return null;
+
             ListNode head = new(values[0], null);
             ListNode current = head;
             for (int i = 1; i < values.Length; i++)

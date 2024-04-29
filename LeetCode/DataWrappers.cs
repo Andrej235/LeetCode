@@ -14,7 +14,7 @@
         public static implicit operator T(InputWrapper<T> value) => value.Value;
     }
 
-    public class TestCaseWrapper<T, U>(T input, U expectedOutput) : ITestCase<T, U> where T : ITestCaseInput where U : notnull
+    public class TestCaseWrapper<T, U>(T input, U expectedOutput) : ITestCase<T, U> where T : ITestCaseInput
     {
         public T Input { get; } = input;
         public U ExpectedOutput { get; } = expectedOutput;
