@@ -1,4 +1,6 @@
-﻿namespace LeetCode.Problems
+﻿using LeetCode.Utility;
+
+namespace LeetCode.Problems
 {
     public class P7ReverseInt : IProblemSolver<TestCaseWrapper<InputWrapper<int>, Wrapper<int>>, Wrapper<int>>
     {

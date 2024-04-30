@@ -1,4 +1,6 @@
-﻿namespace LeetCode.Problems
+﻿using LeetCode.Utility;
+
+namespace LeetCode.Problems
 {
     public class P5LongestPalindromicSubstring : IProblemSolver<P5LongestPalindromicSubstring.LongestPalindromeTestCase, string>
     {

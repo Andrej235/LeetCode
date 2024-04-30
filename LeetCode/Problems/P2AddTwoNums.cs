@@ -2,7 +2,7 @@
 
 namespace LeetCode.Problems
 {
-    public class P2AddTwoNums : IProblemSolver<P2AddTwoNums.AddTwoNumsTestCase, ListNode>
+    public class P2AddTwoNums : IProblemSolver<P2AddTwoNums.AddTwoNumsTestCase, ListNode?>
     {
         public AddTwoNumsTestCase[] TestCases => [
                 new(ListNode.Create(2,4,3), ListNode.Create(5,6,4), ListNode.Create(7,0,8)),
@@ -10,7 +10,7 @@ namespace LeetCode.Problems
                 new(ListNode.Create(9,9,9,9,9,9,9), ListNode.Create(9,9,9,9), ListNode.Create(8,9,9,9,0,0,0,1)),
             ];
 
-        public ListNode Solve(object testCaseInput)
+        public ListNode? Solve(object testCaseInput)
         {
             if (testCaseInput is not AddTwoNumsTestCaseInput addTwoNumsTestCase)
                 throw new ArgumentException(null, nameof(testCaseInput));
@@ -18,7 +18,7 @@ namespace LeetCode.Problems
             return AddTwoLinkedLists(addTwoNumsTestCase.ListRoot1, addTwoNumsTestCase.ListRoot2);
         }
 
-        public static ListNode AddTwoLinkedLists(ListNode listRoot1, ListNode listRoot2)
+        public static ListNode? AddTwoLinkedLists(ListNode? listRoot1, ListNode? listRoot2)
         {
             ListNode? current1 = listRoot1;
             ListNode? current2 = listRoot2;
@@ -79,13 +79,13 @@ namespace LeetCode.Problems
             return listRoot1;
         }
 
-        public record AddTwoNumsTestCaseInput(ListNode ListRoot1, ListNode ListRoot2) : ITestCaseInput;
-        public record AddTwoNumsTestCase : ITestCase<AddTwoNumsTestCaseInput, ListNode>
+        public record AddTwoNumsTestCaseInput(ListNode? ListRoot1, ListNode? ListRoot2) : ITestCaseInput;
+        public record AddTwoNumsTestCase : ITestCase<AddTwoNumsTestCaseInput, ListNode?>
         {
             public AddTwoNumsTestCaseInput Input { get; }
-            public ListNode ExpectedOutput { get; }
+            public ListNode? ExpectedOutput { get; }
 
-            public AddTwoNumsTestCase(ListNode listRoot1, ListNode listRoot2, ListNode expectedOutput)
+            public AddTwoNumsTestCase(ListNode? listRoot1, ListNode? listRoot2, ListNode? expectedOutput)
             {
                 Input = new AddTwoNumsTestCaseInput(listRoot1, listRoot2);
                 ExpectedOutput = expectedOutput;

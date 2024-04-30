@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace LeetCode
+namespace LeetCode.Utility
 {
     public static class JSONUtilities
     {

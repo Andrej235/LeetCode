@@ -1,4 +1,5 @@
-﻿using static LeetCode.Problems.P3Substring;
+﻿using LeetCode.Utility;
+using static LeetCode.Problems.P3Substring;
 
 namespace LeetCode.Problems
 {

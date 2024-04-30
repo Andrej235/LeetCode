@@ -1,4 +1,6 @@
-﻿namespace LeetCode.Problems
+﻿using LeetCode.Utility;
+
+namespace LeetCode.Problems
 {
     public class P10Regex : IProblemSolver<TestCaseWrapper<P10Regex.RegexInput, Wrapper<bool>>, Wrapper<bool>>
     {

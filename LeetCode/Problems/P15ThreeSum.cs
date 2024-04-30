@@ -1,4 +1,6 @@
-﻿namespace LeetCode.Problems
+﻿using LeetCode.Utility;
+
+namespace LeetCode.Problems
 {
     public class P15ThreeSum : IProblemSolver<TestCaseWrapper<InputWrapper<int[]>, IList<IList<int>>>, IList<IList<int>>>
     {

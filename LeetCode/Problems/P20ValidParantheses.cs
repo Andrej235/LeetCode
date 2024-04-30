@@ -1,4 +1,6 @@
-﻿namespace LeetCode.Problems
+﻿using LeetCode.Utility;
+
+namespace LeetCode.Problems
 {
     public class P20ValidParantheses : IProblemSolver<TestCaseWrapper<InputWrapper<string>, Wrapper<bool>>, Wrapper<bool>>
     {

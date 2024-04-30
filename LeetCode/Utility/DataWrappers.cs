@@ -1,4 +1,6 @@
-﻿namespace LeetCode
+﻿using LeetCode.Problems;
+
+namespace LeetCode.Utility
 {
     public class Wrapper<T>(T value) where T : unmanaged
     {

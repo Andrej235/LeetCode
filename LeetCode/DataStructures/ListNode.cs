@@ -41,7 +41,7 @@ namespace LeetCode.DataStructures
 
             while (current != null)
             {
-                result += current.Next != null ? $"{current.Value}, " : current.Value;
+                result += current.Next != null ? $"{current.Value} -> " : current.Value;
                 current = current.Next;
             }
             return result;

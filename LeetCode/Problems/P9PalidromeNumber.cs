@@ -1,4 +1,6 @@
-﻿namespace LeetCode.Problems
+﻿using LeetCode.Utility;
+
+namespace LeetCode.Problems
 {
     public class P9PalidromeNumber : IProblemSolver<TestCaseWrapper<InputWrapper<int>, Wrapper<bool>>, Wrapper<bool>>
     {

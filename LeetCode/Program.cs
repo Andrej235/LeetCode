@@ -1,4 +1,7 @@
-﻿using LeetCode.Problems;
+﻿using LeetCode.DataStructures;
+using LeetCode.Problems;
+using LeetCode.Utility;
+using System.Text.RegularExpressions;
 
 namespace LeetCode
 {
@@ -31,7 +34,7 @@ namespace LeetCode
             else if (keyInfo.Key == ConsoleKey.Enter)
                 StartTest(searchResults.ElementAt(choice));
             else if (keyInfo.Key == ConsoleKey.Backspace)
-                ShowMenu(0, search.Length == 1 || keyInfo.Modifiers.HasFlag(ConsoleModifiers.Control) ? "" : search[..^1]);
+                ShowMenu(0, search.Length == 1 || keyInfo.Modifiers.HasFlag(ConsoleModifiers.Control) ? "" : (search.Length > 0 ? search[..^1] : ""));
             else
                 ShowMenu(choice, search + keyInfo.KeyChar);
         }
@@ -61,6 +64,31 @@ namespace LeetCode
                 return;
             }
 
+            var iProblemSolverTypeTypeArguments = problemSolverType.GetInterfaces().First(x => x.IsAssignableTo(typeof(IProblemSolver<ITestCase<ITestCaseInput, object>, object>))).GetGenericArguments();
+            if (iProblemSolverTypeTypeArguments.Length != 2)
+            {
+                Console.WriteLine($"Problem solver not created correctly, contains {iProblemSolverTypeTypeArguments.Length} type arguments instead of 2 (ITestCase<> and output)");
+                return;
+            }
+
+            Type outputType = iProblemSolverTypeTypeArguments[1];
+            if (outputType == typeof(ListNode))
+            {
+                foreach (var testCase in problemSolver.TestCases)
+                {
+                    var result = problemSolver.Solve(testCase.Input);
+                    if (result is not ListNode resultListNode || testCase.ExpectedOutput is not ListNode expectedListNode)
+                        continue;
+
+                    Console.WriteLine($"Got: {resultListNode}");
+                    Console.WriteLine($"Expected: {expectedListNode}");
+
+                    Console.WriteLine(result.JSONEquals(testCase.ExpectedOutput) ? "OK" : "Failed");
+                    Console.WriteLine();
+                }
+                return;
+            }
+
             foreach (var testCase in problemSolver.TestCases)
             {
                 var result = problemSolver.Solve(testCase.Input);
@@ -68,7 +96,11 @@ namespace LeetCode
                 Console.WriteLine("Got: " + result.ToJSON());
                 Console.WriteLine("Expected: " + testCase.ExpectedOutput.ToJSON());
 
-                Console.WriteLine(result.JSONEquals(testCase.ExpectedOutput) ? "OK" : "Failed");
+                bool success = result is IEnumerable<object> resultEnumerable && testCase.ExpectedOutput is IEnumerable<object> expectedEnumerable
+                    ? resultEnumerable.CollectionFuzzyEquals(expectedEnumerable)
+                    : result.JSONEquals(testCase.ExpectedOutput);
+
+                Console.WriteLine(success ? "OK" : "Failed");
                 Console.WriteLine();
             }
         }
