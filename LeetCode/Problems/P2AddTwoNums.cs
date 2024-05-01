@@ -5,9 +5,9 @@ namespace LeetCode.Problems
     public class P2AddTwoNums : IProblemSolver<P2AddTwoNums.AddTwoNumsTestCase, ListNode?>
     {
         public AddTwoNumsTestCase[] TestCases => [
-                new(ListNode.Create(2,4,3), ListNode.Create(5,6,4), ListNode.Create(7,0,8)),
-                new(ListNode.Create(0), ListNode.Create(0), ListNode.Create(0)),
-                new(ListNode.Create(9,9,9,9,9,9,9), ListNode.Create(9,9,9,9), ListNode.Create(8,9,9,9,0,0,0,1)),
+                new(ListNode.From(2,4,3), ListNode.From(5,6,4), ListNode.From(7,0,8)),
+                new(ListNode.From(0), ListNode.From(0), ListNode.From(0)),
+                new(ListNode.From(9,9,9,9,9,9,9), ListNode.From(9,9,9,9), ListNode.From(8,9,9,9,0,0,0,1)),
             ];
 
         public ListNode? Solve(object testCaseInput)

@@ -78,10 +78,16 @@ namespace LeetCode
                 {
                     var result = problemSolver.Solve(testCase.Input);
                     if (result is not ListNode resultListNode || testCase.ExpectedOutput is not ListNode expectedListNode)
+                    {
+                        Console.WriteLine("Got: " + result.ToJSON());
+                        Console.WriteLine("Expected: " + testCase.ExpectedOutput.ToJSON());
+                        Console.WriteLine(result.JSONEquals(testCase.ExpectedOutput) ? "OK" : "Failed");
+                        Console.WriteLine();
                         continue;
+                    }
 
-                    Console.WriteLine($"Got: {resultListNode}");
-                    Console.WriteLine($"Expected: {expectedListNode}");
+                    Console.WriteLine($"Got:        {resultListNode}");
+                    Console.WriteLine($"Expected:   {expectedListNode}");
 
                     Console.WriteLine(result.JSONEquals(testCase.ExpectedOutput) ? "OK" : "Failed");
                     Console.WriteLine();

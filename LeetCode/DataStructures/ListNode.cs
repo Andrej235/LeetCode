@@ -19,7 +19,7 @@ namespace LeetCode.DataStructures
             Next = next;
         }
 
-        public static ListNode? Create(params int[] values)
+        public static ListNode? From(params int[] values)
         {
             if (values.Length == 0)
                 return null;

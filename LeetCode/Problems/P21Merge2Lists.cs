@@ -12,9 +12,9 @@ namespace LeetCode.Problems
     {
         public record Merge2ListsInput(ListNode? List1, ListNode? List2) : ITestCaseInput;
         public TestCaseWrapper<Merge2ListsInput, ListNode?>[] TestCases => [
-                new(new(ListNode.Create([1,2,4]), ListNode.Create([1,3,4])), ListNode.Create([1,1,2,3,4,4])),
-                new(new(ListNode.Create([]), ListNode.Create([])), ListNode.Create([])),
-                new(new(ListNode.Create([]), ListNode.Create([0])), ListNode.Create([0]))
+                new(new(ListNode.From([1,2,4]), ListNode.From([1,3,4])), ListNode.From([1,1,2,3,4,4])),
+                new(new(ListNode.From([]), ListNode.From([])), ListNode.From([])),
+                new(new(ListNode.From([]), ListNode.From([0])), ListNode.From([0]))
             ];
 
         public ListNode? Solve(object testCaseInput)
