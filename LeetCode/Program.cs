@@ -99,8 +99,8 @@ namespace LeetCode
             {
                 var result = problemSolver.Solve(testCase.Input);
 
-                Console.WriteLine("Got: " + result.ToJSON());
-                Console.WriteLine("Expected: " + testCase.ExpectedOutput.ToJSON());
+                Console.WriteLine("Got:        " + result.ToJSON());
+                Console.WriteLine("Expected:   " + testCase.ExpectedOutput.ToJSON());
 
                 bool success = result is IEnumerable<object> resultEnumerable && testCase.ExpectedOutput is IEnumerable<object> expectedEnumerable
                     ? resultEnumerable.CollectionFuzzyEquals(expectedEnumerable)
